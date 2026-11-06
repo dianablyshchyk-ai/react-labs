@@ -24,12 +24,15 @@ https://denysmatsevych.github.io/web-development-2026/react/labs/lab-2/
 
 ```text
 App
-```
-
-## Дерево залежностей модулів
-
-Заповніть за рядками `import` у файлах `src/` (§4.6).
-
-```text
-main.jsx
-```
+├── Header
+├── Card (title="Тімлід")
+│   └── Avatar
+└── Card (title="Команда")
+    ├── Profile (key="1")
+    │   └── Avatar
+    ├── Profile (key="2")
+    │   └── Avatar
+    ├── Profile (key="3")
+    │   └── Avatar
+    └── Profile (key="4")
+        └── Avatar
