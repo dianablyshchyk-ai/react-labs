@@ -27,8 +27,10 @@ https://mermaid.live/.
 
 ```mermaid
 flowchart TD
-  App
-```
+    App --> SearchBar
+    App --> MenuTable
+    MenuTable --> MenuCategory ["MenuCategory × 3"]
+    MenuCategory --> MenuItemRow ["MenuItemRow × 10"]
 
 ## Стан
 
