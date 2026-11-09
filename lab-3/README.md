@@ -2,7 +2,7 @@
 
 Стартовий проєкт лабораторної роботи № 3 курсу «Розробка вебзастосунків на
 React»: сторінка «Меню кав'ярні». Інструкція:
-[https://denysmatsevych.github.io/web-development-2026/react/labs/lab-3/](https://denysmatsevych.github.io/web-development-2026/react/labs/lab-3/)
+https://denysmatsevych.github.io/web-development-2026/react/labs/lab-3/
 
 Застосунок уже працює, але весь він — один компонент `App` у `src/App.jsx`.
 Ви розкладете його на компоненти в теці `src/components/`, не змінивши
@@ -23,14 +23,14 @@ React»: сторінка «Меню кав'ярні». Інструкція:
 Допишіть діаграму Mermaid за макетом із рамками (§4.2), а після рефакторингу
 звірте її з вкладкою **Components ⚛** у React DevTools (§4.7). GitHub
 показує цей блок діаграмою; перевірити її до `git push` можна в
-[https://mermaid.live/](https://mermaid.live/).
+https://mermaid.live/.
 
 ```mermaid
 flowchart TD
     App --> SearchBar
     App --> MenuTable
-    MenuTable --> MenuCategory ["MenuCategory × 3"]
-    MenuCategory --> MenuItemRow ["MenuItemRow × 10"]
+    MenuTable --> MenuCategory["MenuCategory x 3"]
+    MenuCategory --> MenuItemRow["MenuItemRow x 10"]
 
 ## Стан
 
