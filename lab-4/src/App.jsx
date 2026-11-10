@@ -10,7 +10,12 @@ export default function App() {
   return (
     <main className="app">
   <h1>Меню кав'ярні</h1>
-  <SearchBar filterText={filterText} inStockOnly={inStockOnly} />
+  <SearchBar
+        filterText={filterText}
+        inStockOnly={inStockOnly}
+        onFilterTextChange={setFilterText}
+        onInStockOnlyChange={setInStockOnly}
+      />
   <MenuTable menu={menu} filterText={filterText} inStockOnly={inStockOnly} />
   <CafeInfo />
 </main>
