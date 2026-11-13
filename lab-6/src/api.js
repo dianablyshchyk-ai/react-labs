@@ -3,8 +3,6 @@ import { describeBooking } from './describeBooking.js'
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// Імітує сервер кав'ярні: відповідає за секунду, перевіряє дані тією самою
-// схемою, що й форма, і відмовляє, якщо на обраний час столиків немає.
 export async function sendBooking(booking) {
   console.info('Сервер отримав бронювання:', booking)
   await wait(1000)
