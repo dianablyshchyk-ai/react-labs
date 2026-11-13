@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as yup from 'yup'
 
 const pad = (n) => String(n).padStart(2, '0')
 
@@ -15,32 +15,50 @@ export function nowTime() {
   return `${pad(d.getHours())}:${pad(d.getMinutes())}`
 }
 
-export const bookingSchema = z
-  .object({
-    name: z.string().trim().min(2, "Вкажіть ім'я: щонайменше дві літери"),
-    phone: z
-      .string()
-      .trim()
-      .regex(/^\+380\d{9}$/, 'Вкажіть телефон у форматі +380XXXXXXXXX'),
-    date: z
-      .string()
-      .min(1, 'Оберіть дату')
-      .refine((date) => date >= today(), 'Ця дата вже минула'),
-    time: z
-      .string()
-      .min(1, 'Оберіть час')
-      .refine(
-        (time) => time >= '08:00' && time <= '20:00',
-        'Столик можна забронювати з 8:00 до 20:00',
-      ),
-    guests: z.coerce
-      .number()
-      .int()
-      .min(1, 'Щонайменше 1 гість')
-      .max(8, 'Не більше 8 гостей'),
-    comment: z.string().trim().max(200, 'Коментар — до 200 символів'),
-  })
-  .refine((data) => data.date !== today() || data.time > nowTime(), {
-    error: 'Цей час сьогодні вже минув',
-    path: ['time'],
-  })
+export const bookingSchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .required("Вкажіть ім'я: щонайменше дві літери")
+    .min(2, "Вкажіть ім'я: щонайменше дві літери"),
+  phone: yup
+    .string()
+    .trim()
+    .required('Вкажіть телефон у форматі +380XXXXXXXXX')
+    .matches(/^\+380\d{9}$/, 'Вкажіть телефон у форматі +380XXXXXXXXX'),
+  date: yup
+    .string()
+    .required('Оберіть дату')
+    .test('not-past-date', 'Ця дата вже минула', (value) => {
+      if (!value) return true
+      return value >= today()
+    }),
+  time: yup
+    .string()
+    .required('Оберіть час')
+    .test(
+      'working-hours',
+      'Столик можна забронювати з 8:00 до 20:00',
+      (value) => {
+        if (!value) return true
+        return value >= '08:00' && value <= '20:00'
+      },
+    )
+    .test('not-past-time', 'Цей час сьогодні вже минув', function (value) {
+      const { date } = this.parent
+      if (!value || !date) return true
+      return date !== today() || value > nowTime()
+    }),
+  guests: yup
+    .number()
+    .typeError('Щонайменше 1 гість')
+    .integer()
+    .min(1, 'Щонайменше 1 гість')
+    .max(8, 'Не більше 8 гостей')
+    .required('Щонайменше 1 гість'),
+  comment: yup
+    .string()
+    .trim()
+    .max(200, 'Коментар — до 200 символів')
+    .default(''),
+})
