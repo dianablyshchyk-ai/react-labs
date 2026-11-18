@@ -1,13 +1,15 @@
-import AddToCartButton from '../../shared/AddToCartButton.jsx'
-import FavoriteButton from '../../shared/FavoriteButton.jsx'
 import GrindPicker from './GrindPicker.jsx'
 
-export default function ProductCard({ product }) {
+export default function ProductCard({
+  product,
+  favoriteButton,
+  addToCartButton,
+}) {
   return (
     <article className="product-card">
       <div className="product-title">
         <h1>{product.name}</h1>
-        <FavoriteButton productId={product.id} name={product.name} />
+        {favoriteButton}
       </div>
       <p className="lead">
         {product.origin}, {product.roast}. Ноти: {product.notes.join(', ')}.
@@ -16,7 +18,7 @@ export default function ProductCard({ product }) {
       <p className="price">
         {product.price} грн <span>за {product.weight}</span>
       </p>
-      <AddToCartButton bean={product} />
+      {addToCartButton}
     </article>
   )
 }
