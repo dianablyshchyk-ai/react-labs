@@ -13,8 +13,8 @@
 
 | Структура                  | Тек | Теки |
 | -------------------------- | --- | ---- |
-| За типом файлів (§4.3)     |  4  |src/store, src/hooks, src/components, src/pages    |
-| За маршрутами (§4.4)       |     |      |
+| За типом файлів (§4.3)     |  4  |src/store, src/hooks, src/components, src/pages|
+| За маршрутами (§4.4)       |  3  |src/shared, src/routes/cart, src/app|
 | За функціональністю (§4.5) |     |      |
 | FSD (§4.6)                 |     |      |
 | Пакет (§4.9)               |     |      |

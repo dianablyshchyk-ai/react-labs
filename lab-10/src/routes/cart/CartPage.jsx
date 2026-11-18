@@ -1,7 +1,7 @@
-import CartLine from '../components/CartLine.jsx'
-import Link from '../components/Link.jsx'
-import { useCart } from '../hooks/useCart.js'
-import { paths } from '../utils/paths.js'
+import CartLine from './CartLine.jsx'
+import Link from '../../shared/Link.jsx'
+import { useCart } from '../../shared/useCart.js'
+import { paths } from '../../shared/paths.js'
 
 export default function CartPage() {
   const { lines, total } = useCart()

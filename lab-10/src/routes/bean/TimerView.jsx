@@ -1,6 +1,6 @@
-import { withAnalytics } from '../hoc/withAnalytics.jsx'
-import { formatTime } from '../utils/formatTime.js'
-import Button from './Button.jsx'
+import { withAnalytics } from '../../shared/withAnalytics.jsx'
+import { formatTime } from './formatTime.js'
+import Button from '../../shared/Button.jsx'
 
 const TimerButton = withAnalytics(Button, 'timer_control')
 
