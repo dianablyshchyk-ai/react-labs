@@ -1,0 +1,41 @@
+ lab-10/STRUCTURES.md                                   |  4 [32m++[m[31m--[m
+ lab-10/index.html                                      |  2 [32m+[m[31m-[m
+ lab-10/package.json                                    |  4 [32m++[m[31m--[m
+ lab-10/src/{ => app}/App.jsx                           | 12 [32m++++++[m[31m------[m
+ lab-10/src/{components => app}/AppHeader.jsx           |  6 [32m+++[m[31m---[m
+ lab-10/src/{ => app}/index.css                         |  0
+ lab-10/src/{ => app}/main.jsx                          |  0
+ lab-10/src/{hooks => app}/useRoute.js                  |  0
+ lab-10/src/{pages => routes/bean}/BeanPage.jsx         | 18 [32m+++++++++[m[31m---------[m
+ lab-10/src/{components => routes/bean}/BrewGuide.jsx   |  0
+ lab-10/src/{components => routes/bean}/BrewTimer.jsx   |  2 [32m+[m[31m-[m
+ lab-10/src/{components => routes/bean}/GrindPicker.jsx |  4 [32m++[m[31m--[m
+ lab-10/src/{components => routes/bean}/ProductCard.jsx |  4 [32m++[m[31m--[m
+ .../{components => routes/bean}/RelatedProducts.jsx    |  4 [32m++[m[31m--[m
+ lab-10/src/{components => routes/bean}/ReviewList.jsx  |  0
+ lab-10/src/{components => routes/bean}/ShowMore.jsx    |  2 [32m+[m[31m-[m
+ lab-10/src/{components => routes/bean}/Tabs.jsx        |  0
+ lab-10/src/{components => routes/bean}/TimerView.jsx   |  6 [32m+++[m[31m---[m
+ lab-10/src/{data => routes/bean}/brewMethods.js        |  0
+ lab-10/src/{utils => routes/bean}/formatTime.js        |  0
+ lab-10/src/{data => routes/bean}/grindOptions.js       |  0
+ lab-10/src/{data => routes/bean}/reviews.js            |  0
+ lab-10/src/{hooks => routes/bean}/useCountdown.js      |  0
+ lab-10/src/{hooks => routes/bean}/useShowMore.js       |  0
+ lab-10/src/{components => routes/cart}/CartLine.jsx    |  2 [32m+[m[31m-[m
+ lab-10/src/{pages => routes/cart}/CartPage.jsx         |  8 [32m++++[m[31m----[m
+ lab-10/src/{pages => routes/catalog}/CatalogPage.jsx   |  4 [32m++[m[31m--[m
+ lab-10/src/{components => shared}/AddToCartButton.jsx  |  4 [32m++[m[31m--[m
+ lab-10/src/{components => shared}/BeanCard.jsx         |  2 [32m+[m[31m-[m
+ lab-10/src/{components => shared}/Button.jsx           |  0
+ lab-10/src/{components => shared}/FavoriteButton.jsx   |  2 [32m+[m[31m-[m
+ lab-10/src/{components => shared}/Link.jsx             |  0
+ lab-10/src/{components => shared}/NotFound.jsx         |  4 [32m++[m[31m--[m
+ lab-10/src/{utils => shared}/analytics.js              |  0
+ lab-10/src/{data => shared}/beans.js                   |  0
+ lab-10/src/{store => shared}/cartStore.js              |  0
+ lab-10/src/{utils => shared}/paths.js                  |  0
+ lab-10/src/{hooks => shared}/useCart.js                |  2 [32m+[m[31m-[m
+ lab-10/src/{hooks => shared}/useLocalStorage.js        |  0
+ lab-10/src/{hoc => shared}/withAnalytics.jsx           |  2 [32m+[m[31m-[m
+ 40 files changed, 49 insertions(+), 49 deletions(-)
