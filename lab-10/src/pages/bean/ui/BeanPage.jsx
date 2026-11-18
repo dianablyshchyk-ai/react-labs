@@ -21,9 +21,7 @@ export default function BeanPage({ beanId }) {
     <>
       <ProductCard
         product={bean}
-        favoriteButton={
-          <FavoriteButton productId={bean.id} name={bean.name} />
-        }
+        favoriteButton={<FavoriteButton productId={bean.id} name={bean.name} />}
         addToCartButton={<AddToCartButton bean={bean} />}
       />
       <Tabs defaultValue="brew">
