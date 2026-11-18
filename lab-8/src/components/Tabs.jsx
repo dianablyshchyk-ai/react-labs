@@ -16,6 +16,67 @@
  *
  * Вимоги — у тестах tests/Tabs.children.test.jsx і tests/Tabs.a11y.test.jsx.
  */
-export default function Tabs() {
-  throw new Error('Not implemented: Tabs')
+
+import { createContext, memo, use, useState } from 'react'
+
+const TabsContext = createContext(null)
+
+function useTabsContext() {
+  const context = use(TabsContext)
+  if (!context) {
+    throw new Error('Компоненти Tabs.Tab та Tabs.Panel мають використовуватися всередині <Tabs>')
+  }
+  return context
 }
+
+export default function Tabs({ defaultValue, children }) {
+  const [activeTab, setActiveTab] = useState(defaultValue)
+
+  return (
+    <TabsContext value={{ activeTab, setActiveTab }}>
+      <div className="tabs">{children}</div>
+    </TabsContext>
+  )
+}
+
+function List({ children, ...props }) {
+  return (
+    <div className="tab-list" {...props}>
+      {children}
+    </div>
+  )
+}
+
+function Tab({ value, children }) {
+  const { activeTab, setActiveTab } = useTabsContext()
+  const isActive = activeTab === value
+
+  return (
+    <button
+      type="button"
+      className={isActive ? 'active' : ''}
+      onClick={() => setActiveTab(value)}
+    >
+      {children}
+    </button>
+  )
+}
+
+const PanelContent = memo(function PanelContent({ children }) {
+  return children
+})
+
+function Panel({ value, children }) {
+  const { activeTab } = useTabsContext()
+  const isActive = activeTab === value
+
+  return (
+    <div hidden={!isActive}>
+      <PanelContent>{children}</PanelContent>
+    </div>
+  )
+}
+
+Tabs.List = List
+Tabs.Tab = Tab
+Tabs.Panel = Panel
