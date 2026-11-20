@@ -3,14 +3,18 @@ import OrderBoard from './components/OrderBoard.jsx'
 import OrderComposer from './components/OrderComposer.jsx'
 import OrderDetails from './components/OrderDetails.jsx'
 import { loadOrders } from './data/orders.js'
-import { createInitialState, queueReducer } from './model/queueReducer.js'
+import {
+  createInitialState,
+  queueReducer,
+  selectOrder,
+} from './model/queueReducer.js'
 
 export default function App() {
   const [queue, dispatch] = useReducer(queueReducer, null, () =>
     createInitialState(loadOrders()),
   )
-  // Замовлення, відкрите в «Деталях», або null.
-  const [openedOrder, setOpenedOrder] = useState(null)
+  const [openedOrderId, setOpenedOrderId] = useState(null)
+  const openedOrder = openedOrderId ? selectOrder(queue, openedOrderId) : null
 
   function handlePlace({ customerName, items }) {
     dispatch({
@@ -38,12 +42,12 @@ export default function App() {
           <OrderDetails
             order={openedOrder}
             dispatch={dispatch}
-            onClose={() => setOpenedOrder(null)}
+            onClose={() => setOpenedOrderId(null)}
           />
           <OrderBoard
             queue={queue}
             dispatch={dispatch}
-            onOpen={(order) => setOpenedOrder(order)}
+            onOpen={(order) => setOpenedOrderId(order.id)}
           />
         </main>
       </div>
