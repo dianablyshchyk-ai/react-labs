@@ -37,8 +37,7 @@ export function withUndo(reducer, limit = 20) {
         const nextPresent = reducer(present, action)
         if (nextPresent === present) return history
 
-        const nextPast =
-          limit > 0 ? [...past, present].slice(-limit) : []
+        const nextPast = limit > 0 ? [...past, present].slice(-limit) : []
 
         return {
           past: nextPast,
