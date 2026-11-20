@@ -1,63 +1,43 @@
-import { useId, useState } from 'react'
-import { defaultMilk, drinks, priceOf } from '../data/menu.js'
+import { useId, useReducer } from 'react'
+import { drinks, priceOf } from '../data/menu.js'
+import { draftReducer, emptyDraft } from '../model/draftReducer.js'
 import DraftItem from './DraftItem.jsx'
 
 export default function OrderComposer({ onPlace }) {
   const titleId = useId()
-  const [customerName, setCustomerName] = useState('')
-  const [items, setItems] = useState([])
-  const [total, setTotal] = useState(0)
+  const [draft, dispatch] = useReducer(draftReducer, emptyDraft)
+  const { customerName, items } = draft
+
+  const total = items.reduce((sum, item) => sum + priceOf(item), 0)
 
   function handleNameChange(e) {
-    setCustomerName(e.target.value)
+    dispatch({ type: 'customer_changed', name: e.target.value })
   }
 
   function handleAddDrink(drink) {
-    const item = {
-      id: crypto.randomUUID(),
-      drink,
-      size: 'M',
-      milk: defaultMilk(drink),
-      syrups: [],
-    }
-    setItems([...items, item])
-    setTotal(total + priceOf(item))
+    dispatch({ type: 'drink_added', id: crypto.randomUUID(), drink })
   }
 
   function handleSizeChange(itemId, size) {
-    const item = items.find((i) => i.id === itemId)
-    const changed = { ...item, size }
-    setItems(items.map((i) => (i.id === itemId ? changed : i)))
-    setTotal(total - priceOf(item) + priceOf(changed))
+    dispatch({ type: 'size_chosen', itemId, size })
   }
 
   function handleMilkChange(itemId, milk) {
-    const item = items.find((i) => i.id === itemId)
-    const changed = { ...item, milk }
-    setItems(items.map((i) => (i.id === itemId ? changed : i)))
-    setTotal(total - priceOf(item) + priceOf(changed))
+    dispatch({ type: 'milk_chosen', itemId, milk })
   }
 
   function handleSyrupToggle(itemId, syrup) {
-    const item = items.find((i) => i.id === itemId)
-    const syrups = item.syrups.includes(syrup)
-      ? item.syrups.filter((s) => s !== syrup)
-      : [...item.syrups, syrup]
-    const changed = { ...item, syrups }
-    setItems(items.map((i) => (i.id === itemId ? changed : i)))
-    setTotal(total - priceOf(item) + priceOf(changed))
+    dispatch({ type: 'syrup_toggled', itemId, syrup })
   }
 
   function handleRemove(itemId) {
-    setItems(items.filter((i) => i.id !== itemId))
+    dispatch({ type: 'item_removed', itemId })
   }
 
   function handleSubmit(e) {
     e.preventDefault()
     onPlace({ customerName: customerName.trim(), items })
-    setCustomerName('')
-    setItems([])
-    setTotal(0)
+    dispatch({ type: 'draft_cleared' })
   }
 
   const canPlace = customerName.trim() !== '' && items.length > 0
